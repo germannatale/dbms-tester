@@ -1,20 +1,24 @@
-# CURE
-Calculadora para el Uso Responsable de la Energía
-Desarrollado para la catedra Diseño de Sistemas 2021 UTN FRLP (Argentina)
+# Tester
+Aplicación en Laravel con 3 motores de bases de datos diferentes
+para testear su facilidad de integracion y performance que de cada motor.
+Desarrollado para la catedra Administracion de Bases de Datos 2021 UTN FRLP (Argentina)
 
 # Instalación
 # Levantar entorno en Docker
 docker-compose up -d
 
 # Instalar composer
-docker exec -it cure_php composer install
+docker exec -it tester_php composer install
 
 # Generar llave unica para la app
-docker exec -it cure_php php artisan key:generate
+docker exec -it tester_php php artisan key:generate
+
+# Elegir el motor de DB a testear
+cambiar el archivo .env por el motor de DB deseado
 
 # Migrar datos a la DB
-docker exec -it cure_php php artisan migrate --seed
+docker exec -it tester_php php artisan migrate --seed
 
 # Instalar NPM
-docker exec -it cure_php npm install
-docker exec -it cure_php npm run dev
+docker exec -it tester_php npm install
+docker exec -it tester_php npm run dev

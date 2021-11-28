@@ -55,7 +55,7 @@ services:
 
   mongo-express:
     container_name: tester_mongo-express
-    image: mongo-express:lastest
+    image: mongo-express
     restart: unless-stopped
     ports:
       - 8803:8081
@@ -89,3 +89,7 @@ services:
     ports:
       - "${PGADMIN_PORT:-8805}:80"
     restart: unless-stopped
+  
+volumes:
+    postgres:
+    pgadmin:
