@@ -1,6 +1,6 @@
 # Tester
-Aplicación en Laravel con 3 motores de bases de datos diferentes
-para testear su facilidad de integracion y performance que de cada motor.
+Aplicación en Laravel con 3 motores de bases de datos diferentes dockerizados 
+para realizar pruebas de performance comparativas entre motores.
 Desarrollado para la catedra Administracion de Bases de Datos 2021 UTN FRLP (Argentina)
 
 # Instalación

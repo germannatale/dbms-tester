@@ -21,7 +21,9 @@ RUN apt-get update && \
     libpng-dev \
     libfreetype6-dev \
     libcurl4-openssl-dev \
-    libldap2-dev
+    libldap2-dev \
+    pkg-config \
+    libssl-dev
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -37,9 +39,14 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure \
       gd --with-freetype --with-jpeg
 
+# Driver PostgreSQL
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
+
 # Install PHP extensions
 RUN docker-php-ext-install \
-    pdo_mysql \
+    pdo_mysql \    
     mbstring \
     exif \
     pcntl \
@@ -56,13 +63,17 @@ RUN docker-php-ext-install \
 #RUN apt-get install php-imap php-mcrypt php-pecl-imagick php-pspell php-tidy
 
 # install xdebug
-RUN pecl install xdebug
+RUN pecl install \
+    mongodb
+    # xdebug
+
+RUN pecl config-set php_ini /etc/php.ini
 
 # Prepare PHP environment
 COPY config/php/php-fpm.conf /etc/php-fpm.conf
 COPY config/php/www.conf /etc/php-fpm.d/www.conf
 COPY config/php/php.ini /usr/local/etc/php/php.ini
-COPY config/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+# COPY config/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php

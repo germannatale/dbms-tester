@@ -66,8 +66,8 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
+            'host' => env('POSTGRES_DB_HOST', '127.0.0.1'),
+            'port' => env('POSTGRES_DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
@@ -94,13 +94,13 @@ return [
         'mongodb' => [
             'driver' => 'mongodb',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', 27017),
+            'host' => env('MONGODB_DB_HOST', 'localhost'),
+            'port' => env('MONGODB_DB_PORT', 27017),
             'database' => env('DB_DATABASE'),
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
             'options' => [
-            //'database' => 'styde' // sets the authentication database required by mongo 3
+            //'database' => 'datos' // sets the authentication database required by mongo 3
             ]
         ],
 
