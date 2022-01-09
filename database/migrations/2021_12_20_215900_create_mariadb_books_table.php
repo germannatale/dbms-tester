@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMariadbBooksTable extends Migration
 {
-    //protected $connection = 'mysql';
+    protected $connection = 'mysql';
+
     /**
      * Run the migrations.
      *

@@ -139,13 +139,13 @@ class MenusTableSeeder extends Seeder
         $this->insertLink('guest', 'Inicio', '/', 'fas fa-home');
         $this->insertTitle('guest', 'Configuración');
        
-        $this->insertLink('guest', 'Restaurar',              '/configuracion', 'fas fa-trash-alt');
+        $this->insertLink('guest', 'Restaurar', '/configuracion', 'fas fa-recycle');
         $this->insertTitle('guest', 'Test');
-        $this->insertLink('guest', 'Insert', '/insert', 'fas fa-plus');
-        $this->insertLink('guest', 'Select', '/select', 'fas fa-search');
-        $this->insertLink('guest', 'Delete', '/delete', 'fas fa-trash-alt');
-        $this->insertLink('guest', 'Update', '/update', 'fas fa-edit');
-        $this->insertLink('guest', 'Blob', '/blob', 'fas fa-file-alt');
+        $this->insertLink('guest', 'Insert', 'test/insert', 'fas fa-plus');
+        $this->insertLink('guest', 'Select', 'test/select', 'fas fa-search');
+        $this->insertLink('guest', 'Delete', 'test/delete', 'fas fa-trash-alt');
+        $this->insertLink('guest', 'Update', 'test/update', 'fas fa-edit');
+        $this->insertLink('guest', 'Blob', 'test/blob', 'fas fa-file-alt');
         $this->insertTitle('guest', 'Estadísticas');        
         $this->insertLink('guest', 'Panel', '/panel', 'fas fa-chart-bar');       
         

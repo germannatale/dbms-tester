@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMongoBooksTable extends Migration
 {
-    //protected $connection = 'mongodb';
+    protected $connection = 'mongodb';
 
     /**
      * Run the migrations.
@@ -15,15 +15,17 @@ class CreateMongoBooksTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mongodb')->create('mongo_books', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('author');
-            $table->string('isbn');
-            $table->string('publisher');
-            $table->string('year');
-            $table->longText('ebook')->nullable();
-            $table->timestamps();
+        // Por algun motivo no funciona el down() en mongodb
+        Schema::connection('mongodb')->dropIfExists('mongo_books');
+        Schema::connection('mongodb')->create('mongo_books', function (Blueprint $collection) {
+            $collection->bigIncrements('id');
+            $collection->string('title');
+            $collection->string('author');
+            $collection->string('isbn');
+            $collection->string('publisher');
+            $collection->string('year');
+            $collection->longText('ebook')->nullable();
+            $collection->timestamps();
         });
     }
 
@@ -34,6 +36,6 @@ class CreateMongoBooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mongo_books');
+        Schema::connection('mongodb')->dropIfExists('mongo_books');
     }
 }

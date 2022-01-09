@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePostgresBooksTable extends Migration
 {
-    //protected $connection = 'pgsql';
+    protected $connection = 'pgsql';
 
     /**
      * Run the migrations.
@@ -15,6 +15,8 @@ class CreatePostgresBooksTable extends Migration
      */
     public function up()
     {
+        // Por algun motivo no funciona el down() en postgres
+        Schema::connection('pgsql')->dropIfExists('postgres_books');
         Schema::connection('pgsql')->create('postgres_books', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
@@ -34,6 +36,6 @@ class CreatePostgresBooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postgres_books');
+        Schema::connection('pgsql')->dropIfExists('postgres_books');
     }
 }
