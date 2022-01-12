@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="CURE - Calculadora para el Uso Responsable de la Energía">
-    <meta name="author" content="UTN FRLP Catedra Diseño de Sistemas 2021 Grupo 2">
-    <meta name="keyword" content="Luz,Gas,Calculadora,Gasto,Energia,Uso Responsable">
-    <title>CURE</title>
+    <meta name="description" content="DBMS Tester - Pruebas de rendimiento para motores de Bases de Datos">
+    <meta name="author" content="UTN FRLP Catedra Administración de Bases de Datos 2021 Grupo 7">
+    <meta name="keyword" content="dbms,tester,db,utn,velocidad,bases de datos">
+    <title>DBMS Tester</title>
     <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">

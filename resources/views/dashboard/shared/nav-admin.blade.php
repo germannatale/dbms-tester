@@ -1,6 +1,6 @@
       <div class="c-sidebar-brand">
-        <img class="c-sidebar-brand-full" src="/assets/brand/cure_logo_text.png" width="118" height="46" alt="Cure Logo">
-        <img class="c-sidebar-brand-minimized" src="assets/brand/coreui-signet-white.svg" width="118" height="46" alt="CoreUI Logo">
+        <img class="c-sidebar-brand-full" src="{{ url('/assets/brand/dbms-tester-logo-text.png') }}" width="118" height="46" alt="DBMS Logo">
+        <img class="c-sidebar-brand-minimized" src="{{ url('assets/brand/dbms-tester-logo.png') }}" width="46" height="46" alt="DMBS Logo">        
       </div>
       <nav class="c-sidebar-nav">
         <ul class="c-nav">

@@ -32,8 +32,8 @@ if(!function_exists('renderDropdown')){
 
 
         <div class="c-sidebar-brand">
-            <img class="c-sidebar-brand-full" src="{{ url('/assets/brand/dbms-tester.png') }}" width="118" height="46" alt="DBMS Logo">
-            <img class="c-sidebar-brand-minimized" src="{{ url('assets/brand/dbms-tester.png') }}" width="46" height="46" alt="DMBS Logo">
+            <img class="c-sidebar-brand-full" src="{{ url('/assets/brand/dbms-tester-logo-text.png') }}" width="118" height="46" alt="DBMS Logo">
+            <img class="c-sidebar-brand-minimized" src="{{ url('assets/brand/dbms-tester-logo.png') }}" width="46" height="46" alt="DMBS Logo">
         </div>
         <ul class="c-sidebar-nav">
         @if(isset($appMenus['sidebar menu']))
