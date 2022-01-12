@@ -8,7 +8,6 @@ use App\Models\BooksMongoDB;
 use App\Models\BooksMariaDB;
 use App\Models\BooksPostgres;
 
-
 class TestController extends Controller{
     
     // Test Insert
@@ -136,4 +135,50 @@ class TestController extends Controller{
         );
         return view('dashboard.test.select')->with('resultados', $resultados);
     }
+
+    // Test Delete
+    public function delete(Request $request)
+    {   
+        if(!$request->test_tipo){
+            return view('dashboard.test.delete');
+        }        
+        $tiempo_maria = 0;
+        $tiempo_mongo = 0;
+        $tiempo_postgres = 0;        
+        // delete mariadb        
+        $books_maria = BooksMariaDB::all();
+        $test_cant = $books_maria->count();
+        $inicio = microtime(true);
+        $books_maria->each(function($book) {
+            $book->delete();
+        });
+        $tiempo = microtime(true) - $inicio;
+        $tiempo_maria =  $tiempo_maria + $tiempo;
+        // delete mongodb
+        $inicio = microtime(true);
+        $books_mongo = BooksMongoDB::all();
+        $books_mongo->each(function($book) {
+            $book->delete();
+        });
+        $tiempo = microtime(true) - $inicio;
+        $tiempo_mongo =  $tiempo_mongo + $tiempo;
+        // delete postgres
+        $inicio = microtime(true);
+        $books_postgres = BooksPostgres::all();
+        $books_postgres->each(function($book) {
+            $book->delete();
+        });
+        $tiempo = microtime(true) - $inicio;
+        $tiempo_postgres =  $tiempo_postgres + $tiempo;
+        
+        $resultados = array(
+            'test_tipo' => $request->test_tipo,
+            'test_value' => $test_cant,
+            'test_cant' => $test_cant, // el metodo delete() sobre una collection devuelve la cantidad de registros borrados
+            'tiempo_maria' => $tiempo_maria,
+            'tiempo_mongo' => $tiempo_mongo,
+            'tiempo_postgres' => $tiempo_postgres
+        );
+        return view('dashboard.test.delete')->with('resultados', $resultados); 
+    }   
 }

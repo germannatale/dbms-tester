@@ -58,8 +58,9 @@
                         <div class="card-body">
                             <p>
                                 Tipo de Test: {{$resultados['test_tipo']}}
+                            </p>
                             <p>
-                                Tests Relizados: {{$resultados['test_cant']}}
+                                Registros Afectados: {{$resultados['test_cant']}}
                             </p>
                             <p>
                                 Tiempo de la base de datos <b>MariaDB</b>: {{$resultados['tiempo_maria']}} segundos.
