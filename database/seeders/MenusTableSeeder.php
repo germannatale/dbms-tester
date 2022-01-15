@@ -139,7 +139,7 @@ class MenusTableSeeder extends Seeder
         $this->insertLink('guest', 'Inicio', '/', 'fas fa-home');
         $this->insertTitle('guest', 'Configuración');
        
-        $this->insertLink('guest', 'Restaurar', '/configuracion', 'fas fa-recycle');
+        $this->insertLink('guest', 'Restaurar', '/restaurar', 'fas fa-recycle');
         $this->insertTitle('guest', 'Test');
         $this->insertLink('guest', 'Insert', 'test/insert', 'fas fa-plus');
         $this->insertLink('guest', 'Select', 'test/select', 'fas fa-search');

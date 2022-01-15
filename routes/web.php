@@ -52,12 +52,17 @@ Route::group(['middleware' => ['get.menu']], function () {
         'destroy'   => 'resource.destroy'
     ]);
 
-    Route::prefix('test')->group(function () { 
-        Route::any('/insert',         'TestController@insert')->name('test.insert');
-        Route::any('/select',   'TestController@select')->name('test.select');
-        Route::any('/update',   'TestController@update')->name('test.update');
-        Route::any('/delete',     'TestController@delete')->name('test.delete');
-        Route::any('/blob',  'TestController@blob')->name('test.blob');
+    Route::any('/typography',         'TestController@typography')->name('dashboard.typography');
+
+    Route::get('/restaurar','TestController@restaurar')->name('restaurar');
+    Route::any('/restaurar/destroy','TestController@destroy')->name('restaurar.destroy');
+
+    Route::prefix('test')->group(function () {
+        Route::any('/insert','TestController@insert')->name('test.insert');
+        Route::any('/select','TestController@select')->name('test.select');
+        Route::any('/update','TestController@update')->name('test.update');
+        Route::any('/delete','TestController@delete')->name('test.delete');
+        Route::any('/blob','TestController@blob')->name('test.blob');
     });    
     
     

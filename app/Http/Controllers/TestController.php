@@ -7,8 +7,28 @@ use Faker\Factory as Faker;
 use App\Models\BooksMongoDB;
 use App\Models\BooksMariaDB;
 use App\Models\BooksPostgres;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller{
+
+    // Restaurar DBs
+    public function restaurar(){       
+        return view('dashboard.test.restaurar');
+    }
+
+    public function destroy(){
+        // Borrar Estdisticas
+        //DB::connection('mysql')->table('estadisticas')->truncate();
+        
+        // Borrar Books
+        DB::connection('mysql')->table('mariadb_books')->truncate();    
+        DB::connection('mongodb')->table('mongo_books')->truncate();    
+        DB::connection('pgsql')->table('postgres_books')->truncate();
+       
+        return redirect()->route('restaurar')->withExito('Se han eliminado todos los registros de las bases de datos');
+    }
     
     // Test Insert
     public function insert(Request $request)
@@ -16,7 +36,7 @@ class TestController extends Controller{
         if(!$request->test_value){
             return view('dashboard.test.insert');
         }
-        $faker = Faker::create();
+        $faker = Faker::create('es_AR');
         $tiempo_maria = 0;
         $tiempo_mongo = 0;
         $tiempo_postgres = 0;
@@ -180,5 +200,58 @@ class TestController extends Controller{
             'tiempo_postgres' => $tiempo_postgres
         );
         return view('dashboard.test.delete')->with('resultados', $resultados); 
+    }  
+    
+    // Test Update
+    public function update(Request $request)
+    {
+        if(!$request->test_tipo){
+            return view('dashboard.test.update');
+        }
+        $tiempo_maria = 0;
+        $tiempo_mongo = 0;
+        $tiempo_postgres = 0;
+        
+        // update mariadb
+        $test_cant = BooksMariaDB::all()->count();
+        $books_maria = BooksMariaDB::where('year', $request->test_value)->get();  
+        foreach ($books_maria as $book) {
+            $book->title = $book->title . ' - ' . $book->year;
+            $inicio = microtime(true);
+            $book->save();
+            $tiempo = microtime(true) - $inicio;
+            $tiempo_maria =  $tiempo_maria + $tiempo;
+        }
+        // update mongodb
+        $books_mongo = BooksMongoDB::where('year', $request->test_value)->get();
+        foreach ($books_mongo as $book) {
+            $book->title = $book->title . ' - ' . $book->year;
+            $inicio = microtime(true);
+            $book->save();
+            $tiempo = microtime(true) - $inicio;
+            $tiempo_mongo =  $tiempo_mongo + $tiempo;
+        }
+        // update postgres
+        $books_postgres = BooksPostgres::where('year', $request->test_value)->get();
+        foreach ($books_postgres as $book) {
+            $book->title = $book->title . ' - ' . $book->year;
+            $inicio = microtime(true);
+            $book->save();
+            $tiempo = microtime(true) - $inicio;
+            $tiempo_postgres =  $tiempo_postgres + $tiempo;
+        }
+
+        $resultados = array(
+            'test_tipo' => $request->test_tipo,
+            'test_value' => $request->test_value,
+            'test_cant' => $test_cant,
+            'tiempo_maria' => $tiempo_maria,
+            'tiempo_mongo' => $tiempo_mongo,
+            'tiempo_postgres' => $tiempo_postgres
+        );
+        return view('dashboard.test.update')->with('resultados', $resultados);
     }   
+          
+            
+
 }
