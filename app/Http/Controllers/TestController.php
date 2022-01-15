@@ -7,9 +7,8 @@ use Faker\Factory as Faker;
 use App\Models\BooksMongoDB;
 use App\Models\BooksMariaDB;
 use App\Models\BooksPostgres;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TestController extends Controller{
 
@@ -252,6 +251,58 @@ class TestController extends Controller{
         return view('dashboard.test.update')->with('resultados', $resultados);
     }   
           
-            
+    // Test Blob
+    public function blob(Request $request)
+    {
+        if(!$request->test_tipo){
+            return view('dashboard.test.blob');
+        }
+        $tiempo_maria = 0;
+        $tiempo_mongo = 0;
+        $tiempo_postgres = 0;
+
+        // Obtengo el binario de storage
+        $blob = Storage::get('public/ebook.txt');
+        
+        
+        // blob mariadb
+        $test_cant = BooksMariaDB::all()->count();
+        $books_maria = BooksMariaDB::all();  
+        foreach ($books_maria as $book) {
+            $book->ebook = $blob;            
+            $inicio = microtime(true);
+            $book->save();
+            $tiempo = microtime(true) - $inicio;
+            $tiempo_maria =  $tiempo_maria + $tiempo;
+        }
+        // blob mongodb
+        $books_mongo = BooksMongoDB::all();
+        foreach ($books_mongo as $book) {
+            $book->ebook = $blob;
+            $inicio = microtime(true);
+            $book->save();
+            $tiempo = microtime(true) - $inicio;
+            $tiempo_mongo =  $tiempo_mongo + $tiempo;
+        }
+        // blob postgres
+        $books_postgres = BooksPostgres::all();
+        foreach ($books_postgres as $book) {
+            $book->ebook = $blob;
+            $inicio = microtime(true);
+            $book->save();
+            $tiempo = microtime(true) - $inicio;
+            $tiempo_postgres =  $tiempo_postgres + $tiempo;
+        }
+
+        $resultados = array(
+            'test_tipo' => $request->test_tipo,
+            'test_value' => $request->test_value,
+            'test_cant' => $test_cant,
+            'tiempo_maria' => $tiempo_maria,
+            'tiempo_mongo' => $tiempo_mongo,
+            'tiempo_postgres' => $tiempo_postgres
+        );
+        return view('dashboard.test.blob')->with('resultados', $resultados);
+    }    
 
 }

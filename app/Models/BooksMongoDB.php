@@ -16,4 +16,16 @@ class BooksMongoDB extends Model
     protected $fillable = [
         'title', 'author', 'isbn', 'publisher', 'year', 'ebook',
     ];
+
+    public function setEbookAttribute($value)
+    {
+        // guardo el blob como base64
+        $this->attributes['ebook'] = base64_encode($value);
+    }
+
+    public function getEbookAttribute($value)
+    {
+        // devuelvo el blob
+        return base64_decode($value);
+    }
 }
