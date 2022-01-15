@@ -53,35 +53,23 @@
     <link href="{{ asset('css/coreui-chartjs.css') }}" rel="stylesheet">
   </head>
 
-
-
   <body class="c-app">
-    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-
-      @include('dashboard.shared.nav-builder')
-
-      @include('dashboard.shared.header')
-
-      <div class="c-body">
-
-        <main class="c-main">
-
-          @yield('content') 
-
-        </main>
-        @include('dashboard.shared.footer')
+      <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+          @include('dashboard.shared.nav-builder')
+          @include('dashboard.shared.header')
+          <div class="c-body">
+              @include('dashboard.shared.mensajes')
+              <main class="c-main">
+                  @yield('content')
+              </main>
+              @include('dashboard.shared.footer')
+          </div>
       </div>
-    </div>
 
-
-
-    <!-- CoreUI and necessary plugins-->
-    <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/coreui-utils.js') }}"></script>
-    @yield('javascript')
-
-
-
-
+      <!-- CoreUI and necessary plugins-->
+      <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
+      <script src="{{ asset('js/coreui-utils.js') }}"></script>
+      @yield('javascript')
   </body>
+  
 </html>
