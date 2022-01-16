@@ -7,6 +7,7 @@ use Faker\Factory as Faker;
 use App\Models\BooksMongoDB;
 use App\Models\BooksMariaDB;
 use App\Models\BooksPostgres;
+use App\Models\Estadistica;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,7 +20,7 @@ class TestController extends Controller{
 
     public function destroy(){
         // Borrar Estdisticas
-        //DB::connection('mysql')->table('estadisticas')->truncate();
+        DB::connection('mysql')->table('estadisticas')->truncate();
         
         // Borrar Books
         DB::connection('mysql')->table('mariadb_books')->truncate();    
@@ -87,14 +88,16 @@ class TestController extends Controller{
             $tiempo = microtime(true) - $inicio;
             $tiempo_postgres =  $tiempo_postgres + $tiempo;
         }
+        $test_cant = BooksMariaDB::count();
         $resultados = array(
             'test_tipo' => $request->test_tipo,
             'test_value' => $request->test_value,
-            'test_cant' => $request->test_value,
+            'test_cant' => $test_cant,
             'tiempo_maria' => $tiempo_maria,
             'tiempo_mongo' => $tiempo_mongo,
             'tiempo_postgres' => $tiempo_postgres
-        );            
+        );
+        $this->guardarEstadistica($resultados);            
         return view('dashboard.test.insert')->with('resultados', $resultados);
     }
 
@@ -143,15 +146,17 @@ class TestController extends Controller{
                 $tiempo_postgres =  $tiempo_postgres + $tiempo;
             break;            
         }
-        $test_cant = $books_maria->count();
+        $test_cant = BooksMariaDB::count();
+        $rows_afectados = $books_maria->count();
         $resultados = array(
             'test_tipo' => $request->test_tipo,
-            'test_value' => $request->test_value,
+            'test_value' => $rows_afectados,
             'test_cant' => $test_cant,
             'tiempo_maria' => $tiempo_maria,
             'tiempo_mongo' => $tiempo_mongo,
             'tiempo_postgres' => $tiempo_postgres
         );
+        $this->guardarEstadistica($resultados);
         return view('dashboard.test.select')->with('resultados', $resultados);
     }
 
@@ -193,11 +198,12 @@ class TestController extends Controller{
         $resultados = array(
             'test_tipo' => $request->test_tipo,
             'test_value' => $test_cant,
-            'test_cant' => $test_cant, // el metodo delete() sobre una collection devuelve la cantidad de registros borrados
+            'test_cant' => $test_cant,
             'tiempo_maria' => $tiempo_maria,
             'tiempo_mongo' => $tiempo_mongo,
             'tiempo_postgres' => $tiempo_postgres
         );
+        $this->guardarEstadistica($resultados);
         return view('dashboard.test.delete')->with('resultados', $resultados); 
     }  
     
@@ -212,7 +218,7 @@ class TestController extends Controller{
         $tiempo_postgres = 0;
         
         // update mariadb
-        $test_cant = BooksMariaDB::all()->count();
+        $test_cant = BooksMariaDB::count();
         $books_maria = BooksMariaDB::where('year', $request->test_value)->get();  
         foreach ($books_maria as $book) {
             $book->title = $book->title . ' - ' . $book->year;
@@ -242,12 +248,13 @@ class TestController extends Controller{
 
         $resultados = array(
             'test_tipo' => $request->test_tipo,
-            'test_value' => $request->test_value,
+            'test_value' => $books_maria->count(),
             'test_cant' => $test_cant,
             'tiempo_maria' => $tiempo_maria,
             'tiempo_mongo' => $tiempo_mongo,
             'tiempo_postgres' => $tiempo_postgres
         );
+        $this->guardarEstadistica($resultados);
         return view('dashboard.test.update')->with('resultados', $resultados);
     }   
           
@@ -292,17 +299,30 @@ class TestController extends Controller{
             $book->save();
             $tiempo = microtime(true) - $inicio;
             $tiempo_postgres =  $tiempo_postgres + $tiempo;
-        }
-
+        }        
         $resultados = array(
             'test_tipo' => $request->test_tipo,
-            'test_value' => $request->test_value,
+            'test_value' => $test_cant,
             'test_cant' => $test_cant,
             'tiempo_maria' => $tiempo_maria,
             'tiempo_mongo' => $tiempo_mongo,
             'tiempo_postgres' => $tiempo_postgres
         );
+        $this->guardarEstadistica($resultados);
         return view('dashboard.test.blob')->with('resultados', $resultados);
-    }    
+    }
+    
+    // Guarda Estadisticas
+    public function guardarEstadistica($resultado)
+    {
+        $estadistica = new Estadistica();
+        $estadistica->test_tipo = $resultado['test_tipo'];
+        $estadistica->test_value = $resultado['test_value'];
+        $estadistica->test_cant = $resultado['test_cant'];
+        $estadistica->tiempo_maria = $resultado['tiempo_maria'];
+        $estadistica->tiempo_mongo = $resultado['tiempo_mongo'];
+        $estadistica->tiempo_postgres = $resultado['tiempo_postgres'];
+        $estadistica->save();
+    }
 
 }

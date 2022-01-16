@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {           return view('dashboard.home'); });
     Route::get('/charts', function () {     return view('dashboard.charts'); });
-    Route::get('/panel', function () {     return view('dashboard.charts'); });
+    
 
     Route::prefix('menu/element')->group(function () { 
         Route::get('/',             'MenuElementController@index')->name('menu.index');
@@ -54,16 +54,25 @@ Route::group(['middleware' => ['get.menu']], function () {
 
     Route::any('/typography',         'TestController@typography')->name('dashboard.typography');
 
+    // Restaurar
     Route::get('/restaurar','TestController@restaurar')->name('restaurar');
     Route::any('/restaurar/destroy','TestController@destroy')->name('restaurar.destroy');
 
+    // Test
     Route::prefix('test')->group(function () {
         Route::any('/insert','TestController@insert')->name('test.insert');
         Route::any('/select','TestController@select')->name('test.select');
         Route::any('/update','TestController@update')->name('test.update');
         Route::any('/delete','TestController@delete')->name('test.delete');
         Route::any('/blob','TestController@blob')->name('test.blob');
-    });    
+    }); 
+    
+    // Panel Resultados
+    Route::prefix('panel')->group(function () {
+        Route::get('/', 'PanelController@index')->name('panel.index');
+        Route::get('/resultado/{test}', 'PanelController@testResultado')->name('panel.resultado');
+        Route::get('/resultados', 'PanelController@resultados')->name('panel.resultados');
+    });
     
     
 });

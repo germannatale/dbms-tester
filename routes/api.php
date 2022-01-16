@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
+
+Route::get('/panel/{test}/resultado', 'PanelController@testResultado')->name('panel.resultado');
+Route::get('/panel/resultados', 'PanelController@resultados')->name('panel.resultados');
