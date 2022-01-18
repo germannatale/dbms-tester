@@ -9,7 +9,11 @@ class PanelController extends Controller
 {
     public function index()
     {
-        return view('dashboard.panel.charts');
+        $estadisticas = Estadistica::groupBy('test_tipo')                        
+            ->selectRaw('test_tipo ,avg(tiempo_maria) as tiempo_maria, avg(tiempo_mongo) as tiempo_mongo, avg(tiempo_postgres) as tiempo_postgres')
+            ->get();
+
+        return view('dashboard.panel.estadisticas')->with('estadisticas', $estadisticas);
     }
 
     public function testResultado(Request $request)

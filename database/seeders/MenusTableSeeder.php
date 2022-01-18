@@ -142,32 +142,33 @@ class MenusTableSeeder extends Seeder
         $this->insertLink('guest', 'Restaurar', '/restaurar', 'fas fa-recycle');
         $this->insertTitle('guest', 'Test');
         $this->insertLink('guest', 'Insert', 'test/insert', 'fas fa-plus');
-        $this->insertLink('guest', 'Select', 'test/select', 'fas fa-search');
-        $this->insertLink('guest', 'Delete', 'test/delete', 'fas fa-trash-alt');
+        $this->insertLink('guest', 'Select', 'test/select', 'fas fa-search');        
         $this->insertLink('guest', 'Update', 'test/update', 'fas fa-edit');
         $this->insertLink('guest', 'Blob', 'test/blob', 'fas fa-file-alt');
+        $this->insertLink('guest', 'Delete', 'test/delete', 'fas fa-trash-alt');
         $this->insertTitle('guest', 'Estadísticas');        
-        $this->insertLink('guest', 'Panel', '/panel', 'fas fa-chart-bar');       
+        $this->insertLink('guest', 'Panel', '/panel', 'fas fa-chart-bar');
+        $this->insertLink('guest', 'Resultados', '/resultados', 'fas fa-list-ol');
         
         $this->endDropdown();      
 
         /* Create top menu */
-        DB::table('menulist')->insert([
-            'name' => 'top menu'
-        ]);
-        $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
-        $this->beginDropdown('guest,user,admin', 'Vinculos');
-        $id = $this->insertLink('guest,user,admin', 'Panel',    '/');
-        $id = $this->insertLink('user,admin', 'Notas',              '/notes');
-        $id = $this->insertLink('admin', 'Usuarios',                   '/users');
-        $id = $this->insertLink('admin', 'Roles',              '/roles');
-        $this->endDropdown();
-        $id = $this->beginDropdown('dev', 'Settings');
-        $id = $this->insertLink('dev', 'Edit menu',               '/menu/menu');
-        $id = $this->insertLink('dev', 'Edit menu elements',      '/menu/element');        
-        $id = $this->insertLink('dev', 'Media',                   '/media');
-        $id = $this->insertLink('dev', 'BREAD',                   '/bread');
-        $this->endDropdown();
+        // DB::table('menulist')->insert([
+        //     'name' => 'top menu'
+        // ]);
+        // $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
+        // $this->beginDropdown('guest,user,admin', 'Vinculos');
+        // $id = $this->insertLink('guest,user,admin', 'Panel',    '/');
+        // $id = $this->insertLink('user,admin', 'Notas',              '/notes');
+        // $id = $this->insertLink('admin', 'Usuarios',                   '/users');
+        // $id = $this->insertLink('admin', 'Roles',              '/roles');
+        // $this->endDropdown();
+        // $id = $this->beginDropdown('dev', 'Settings');
+        // $id = $this->insertLink('dev', 'Edit menu',               '/menu/menu');
+        // $id = $this->insertLink('dev', 'Edit menu elements',      '/menu/element');        
+        // $id = $this->insertLink('dev', 'Media',                   '/media');
+        // $id = $this->insertLink('dev', 'BREAD',                   '/bread');
+        // $this->endDropdown();
 
         $this->joinAllByTransaction(); ///   <===== Must by use on end of this seeder
     }

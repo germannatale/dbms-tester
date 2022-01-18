@@ -73,6 +73,11 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('/resultado/{test}', 'PanelController@testResultado')->name('panel.resultado');
         Route::get('/resultados', 'PanelController@resultados')->name('panel.resultados');
     });
+
+    // Resultados
+    Route::prefix('resultados')->group(function () {
+        Route::get('/', 'ResultadosController@index')->name('resultados.index');        
+    });
     
     
 });
