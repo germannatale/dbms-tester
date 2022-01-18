@@ -9,8 +9,8 @@
 
         @foreach ($estadisticas as $estadistica)
           <div class="card">
-            <div class="card-header">{{$estadistica->test_tipo}}
-              <div class="card-header-actions"></div>
+            <div class="card-header">{{ strtoupper($estadistica->test_tipo) }}
+              <div class="card-header-actions"><small class="text-muted">Versus</small></div>
             </div>
             <div class="card-body">
               <div class="c-chart-wrapper">

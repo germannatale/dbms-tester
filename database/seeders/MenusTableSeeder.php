@@ -136,19 +136,27 @@ class MenusTableSeeder extends Seeder
             'name' => 'sidebar menu'
         ]);
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
-        $this->insertLink('guest', 'Inicio', '/', 'fas fa-home');
-        $this->insertTitle('guest', 'Configuración');
+
+        /* Inicio */
+        $this->insertLink('guest', 'Inicio', '/', 'fas fa-home');        
        
-        $this->insertLink('guest', 'Restaurar', '/restaurar', 'fas fa-recycle');
+         /* Tests */
         $this->insertTitle('guest', 'Test');
         $this->insertLink('guest', 'Insert', 'test/insert', 'fas fa-plus');
         $this->insertLink('guest', 'Select', 'test/select', 'fas fa-search');        
         $this->insertLink('guest', 'Update', 'test/update', 'fas fa-edit');
         $this->insertLink('guest', 'Blob', 'test/blob', 'fas fa-file-alt');
         $this->insertLink('guest', 'Delete', 'test/delete', 'fas fa-trash-alt');
+
+         /* Estadisticas */
         $this->insertTitle('guest', 'Estadísticas');        
-        $this->insertLink('guest', 'Panel', '/panel', 'fas fa-chart-bar');
-        $this->insertLink('guest', 'Resultados', '/resultados', 'fas fa-list-ol');
+        $this->insertLink('guest', 'VS Promedio', '/estadisticas/vs/promedio', 'fas fa-chart-pie');
+        $this->insertLink('guest', 'VS Curvas', '/estadisticas/vs/curvas', 'fas fa-chart-line');   
+        $this->insertLink('guest', 'MariaDB', '/estadisticas/motor/mariadb', 'fas fa-database');        
+        $this->insertLink('guest', 'MongoDB', '/estadisticas/motor/mongodb', 'fas fa-database');        
+        $this->insertLink('guest', 'PostgreSQL', '/estadisticas/motor/postgresql', 'fas fa-database');
+        $this->insertLink('guest', 'Resultados', '/estadisticas/resultados', 'fas fa-list-ol');
+        $this->insertLink('guest', 'Restaurar', '/estadisticas/restaurar', 'fas fa-recycle');
         
         $this->endDropdown();      
 

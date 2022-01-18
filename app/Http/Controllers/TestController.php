@@ -11,24 +11,7 @@ use App\Models\Estadistica;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class TestController extends Controller{
-
-    // Restaurar DBs
-    public function restaurar(){       
-        return view('dashboard.test.restaurar');
-    }
-
-    public function destroy(){
-        // Borrar Estdisticas
-        DB::connection('mysql')->table('estadisticas')->truncate();
-        
-        // Borrar Books
-        DB::connection('mysql')->table('mariadb_books')->truncate();    
-        DB::connection('mongodb')->table('mongo_books')->truncate();    
-        DB::connection('pgsql')->table('postgres_books')->truncate();
-       
-        return redirect()->route('restaurar')->withExito('Se han eliminado todos los registros de las bases de datos');
-    }
+class TestController extends Controller{    
     
     // Test Insert
     public function insert(Request $request)

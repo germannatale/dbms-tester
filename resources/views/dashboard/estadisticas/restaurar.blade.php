@@ -22,7 +22,7 @@
                         <p>
                             <em>Actualmente se encuentran {{ $books_cant }} libros en la DB.</em>
                         </p>
-                        <form method="POST" action="{{route('restaurar.destroy')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('estadisticas.destroy')}}" enctype="multipart/form-data">
                             @csrf                    
                             <input type="hidden" name="resultado" value="delete">
                             <button type="submit" class="btn btn-danger"><i class="fas fa-recycle"></i> Blanquear Datos</button>
