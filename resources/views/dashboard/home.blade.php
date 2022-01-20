@@ -22,20 +22,23 @@
                 </p>
                 <h4>Como operar?</h4>
                 <p>
-                    Si puede leer este texto todo esta listo para realizar las pruebas preestablecidas. Puede modificar o crear nuevas pruebas 
-                    desde el código. Se recomienda hacerlos en el orden preestablecido en el menu partiendo de un numero de operaciones insert (ej: 1.000) y luego
-                    seguir con el resto de los test. Al terminar puede consultar las estadisticas de rendimiento de cada motor de base de datos para ese numero de 
-                    operaciones. Las mismas promedian los tiempos para cada test obtenidos. Es decir si hace mas de una prueba se promedia el tiempo de cada una 
-                    para cada motor. 
-                    Desde restaurar puede borrar todos los datos y comenzar de vuelta con otra cantidad de inserts (ej: 10.000) para ver si el comportamiento es similar.
+                  Los tres motores poseen una tabla books (title, isbn, author, year, ebook) sobre la cual se haran los test. 
+                  Se recomienda hacer los test en el orden preestablecido en el menu partiendo de un numero de operaciones INSERT (ej: 1.000) 
+                  y luego seguir con el resto de los tests. El ultimo test DELETE vacía la tabla de pruebas por lo que puede comenzar nuevamente 
+                  desde el principio con otra cantidad de registros (ej 10.000). En cualquier momento puede consultar las estadísticas de 
+                  rendimiento de cada motor para ese numero de operaciones. Las mismas promedian los tiempos para cada test obtenidos. 
+                  Es decir si hace mas de una prueba para la misma cantidad de registros se promedia el tiempo de cada test para cada motor. 
+                  Lo recomendable es hacer unas 5 vueltas completas para obtener resultados suficientes (ej: 1000, 2000, 4000, 8000, 16000). 
+                  Puede modificar o crear nuevas pruebas desde el código. 
                 </p>
                 <ul>
-                    <li>1. Elija una prueba</li>
-                    <li>2. Establezca la dificultad si es el caso</li>
-                    <li>3. Ejecutela (correra en los tres motores mencionados)</li>
-                    <li>4. Obtenga Resultados</li>
-                    <li>5. Continue con el siguiente test.</li>
-                    <li>6. Consulte las estadisticas.</li>
+                  <li>1. Comience con un test INSERT</li>
+                  <li>2. Establezca la dificultad (1.000 , 10.000, etc)</li>
+                  <li>3. Ejecútelo (correrá en los tres motores mencionados)</li>
+                  <li>4. Obtenga Resultados</li>
+                  <li>5. Continúe con el siguiente test.</li>
+                  <li>6. Finalizado el test DELETE vuelva a INSERT con una nueva dificultad.</li>
+                  <li>7. Consulte las estadísticas (Se recomienda hacer 5 vueltas).</li>
                 </ul>
             </div>
         </div>
