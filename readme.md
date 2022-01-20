@@ -60,6 +60,6 @@ Puede necesitar iniciar manualmente la base de datos en PostgresSQL. Para ello i
 en el `.env`.
 
 ## Screenshot
-![Estadisticas](/resources/assets/screenshots/base-octocat.14-estadist-vs-curvas.png)
+![Estadisticas](https://github.com/germannatale/dbms-tester/blob/master/resources/assets/screenshots/14-estadist-vs-curvas.png)
 
 
